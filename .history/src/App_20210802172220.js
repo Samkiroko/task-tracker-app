@@ -26,7 +26,7 @@ function App() {
   return (
     <div className="container">
       <Header title="Task Tracker" />
-      {tasks.length > 0 ? (
+      {task.length > 0 ? (
         <Task tasks={tasks} onDelete={deleteTask} />
       ) : (
         <div>No Tasks</div>

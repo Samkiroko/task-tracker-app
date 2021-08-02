@@ -3,7 +3,7 @@ import Header from './components/Header';
 import Task from './components/Tasks';
 
 function App() {
-  const [tasks, setTasks] = useState([
+  const [task, setTask] = useState([
     {
       id: 1,
       text: 'Buy groceries',
@@ -17,20 +17,10 @@ function App() {
       completed: false,
     },
   ]);
-
-  // Delete Task
-  const deleteTask = (id) => {
-    setTasks(tasks.filter((task) => task.id !== id));
-  };
-
   return (
     <div className="container">
       <Header title="Task Tracker" />
-      {tasks.length > 0 ? (
-        <Task tasks={tasks} onDelete={deleteTask} />
-      ) : (
-        <div>No Tasks</div>
-      )}
+      <Task tasks={tasks} />
     </div>
   );
 }
