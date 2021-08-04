@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import Tasks from './components/Tasks';
+import { BrowserRouter as Router, Route } from 'react-dom';
 import AddTask from './components/AddTask';
+import Footer from './components/Footer';
+import Header from './components/Header';
+import Task from './components/Tasks';
 import About from './components/About';
 
-const App = () => {
+function App() {
   const [showAddTask, setShowAddTask] = useState(false);
   const [tasks, setTasks] = useState([]);
 
@@ -15,23 +15,20 @@ const App = () => {
       const tasksFromServer = await fetchTasks();
       setTasks(tasksFromServer);
     };
-
     getTasks();
   }, []);
 
-  // Fetch Tasks
+  // fetch tasks
   const fetchTasks = async () => {
     const res = await fetch('http://localhost:5000/tasks');
     const data = await res.json();
-
     return data;
   };
 
-  // Fetch Task
+  // fetch tasks
   const fetchTask = async (id) => {
     const res = await fetch(`http://localhost:5000/tasks/${id}`);
     const data = await res.json();
-
     return data;
   };
 
@@ -46,30 +43,27 @@ const App = () => {
     });
 
     const data = await res.json();
-
     setTasks([...tasks, data]);
-
-    // const id = Math.floor(Math.random() * 10000) + 1
-    // const newTask = { id, ...task }
-    // setTasks([...tasks, newTask])
+    //   const id = Math.floor(Math.random() * 10000) + 1;
+    //   const newTask = {
+    //     id,
+    //     ...task,
+    //   };
+    //   setTasks([...tasks, newTask]);
   };
 
   // Delete Task
   const deleteTask = async (id) => {
-    const res = await fetch(`http://localhost:5000/tasks/${id}`, {
+    await fetch(`http://localhost:5000/tasks/${id}`, {
       method: 'DELETE',
     });
-    //We should control the response status to decide if we will change the state or not.
-    res.status === 200
-      ? setTasks(tasks.filter((task) => task.id !== id))
-      : alert('Error Deleting This Task');
+    setTasks(tasks.filter((task) => task.id !== id));
   };
 
-  // Toggle Reminder
+  //  Toggle reminder
   const toggleReminder = async (id) => {
     const taskToToggle = await fetchTask(id);
     const updTask = { ...taskToToggle, reminder: !taskToToggle.reminder };
-
     const res = await fetch(`http://localhost:5000/tasks/${id}`, {
       method: 'PUT',
       headers: {
@@ -117,6 +111,6 @@ const App = () => {
       </div>
     </Router>
   );
-};
+}
 
 export default App;
