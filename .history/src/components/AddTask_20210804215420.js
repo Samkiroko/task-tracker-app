@@ -7,14 +7,11 @@ const AddTask = ({ onAdd }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-
     if (!text) {
-      alert('Please add a task');
+      alert('Please enter a task');
       return;
     }
-
-    onAdd({ text, day, reminder });
-
+    onAdd(text, day, reminder);
     setText('');
     setDay('');
     setReminder(false);
@@ -26,7 +23,7 @@ const AddTask = ({ onAdd }) => {
         <label>Task</label>
         <input
           type="text"
-          placeholder="Add Task"
+          placeholder="add task"
           value={text}
           onChange={(e) => setText(e.target.value)}
         />
@@ -35,7 +32,7 @@ const AddTask = ({ onAdd }) => {
         <label>Day & Time</label>
         <input
           type="text"
-          placeholder="Add Day & Time"
+          placeholder="add Day & Time"
           value={day}
           onChange={(e) => setDay(e.target.value)}
         />
@@ -49,8 +46,7 @@ const AddTask = ({ onAdd }) => {
           onChange={(e) => setReminder(e.currentTarget.checked)}
         />
       </div>
-
-      <input type="submit" value="Save Task" className="btn btn-block" />
+      <input type="submit" value="save Task" className="btn btn-block" />
     </form>
   );
 };
