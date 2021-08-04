@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import AddTask from './components/AddTask';
 import Header from './components/Header';
 import Task from './components/Tasks';
 
@@ -26,17 +25,12 @@ function App() {
 
   //  Toggle reminder
   const toggleReminder = (id) => {
-    setTasks(
-      tasks.map((task) =>
-        task.id === id ? { ...task, reminder: !task.reminder } : task,
-      ),
-    );
+    console.log('id');
   };
 
   return (
     <div className="container">
       <Header title="Task Tracker" />
-      <AddTask />
       {tasks.length > 0 ? (
         <Task tasks={tasks} onDelete={deleteTask} onToggle={toggleReminder} />
       ) : (
